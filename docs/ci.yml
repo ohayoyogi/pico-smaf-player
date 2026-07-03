@@ -1,0 +1,25 @@
+name: ci
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: build the engine + example
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install toolchain
+        run: sudo apt-get update && sudo apt-get install -y cmake g++ ninja-build
+      - name: configure
+        run: cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+      - name: build
+        run: cmake --build build
+      - name: smoke (garbage input must be rejected with exit 1, not a crash)
+        run: |
+          printf 'not a smaf file' > bad.bin
+          ./build/smaf-render bad.bin out.wav 1; rc=$?
+          if [ "$rc" -eq 1 ]; then echo "rejected as expected"; else echo "unexpected exit $rc"; exit 1; fi

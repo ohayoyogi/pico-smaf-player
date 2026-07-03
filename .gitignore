@@ -1,0 +1,31 @@
+# build
+/build/
+*.o
+*.obj
+*.exe
+*.a
+*.lib
+*.so
+*.dylib
+*.pdb
+*.wav
+# in-source configure leftovers
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+
+# ide
+.vs/
+.vscode/
+.idea/
+*.user
+
+# os
+.DS_Store
+Thumbs.db
+
+# never commit copyrighted test material: no yamaha sample rom, no sdk dumps,
+# and .mmf corpora stay out of the repo (they belong to whoever made them).
+*.mmf
+*.mld
