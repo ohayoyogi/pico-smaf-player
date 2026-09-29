@@ -21,3 +21,9 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     add_executable(smaf-render example/smaf-render.cpp)
     target_link_libraries(smaf-render PRIVATE smaf)
 endif()
+
+# fixed-point FM core prototype: renders the float and integer cores side by side.
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    add_executable(fm-compare tools/fm_compare.cpp src/ma_fm_core.cpp src/ma_fm_fixed.cpp)
+    target_include_directories(fm-compare PRIVATE src)
+endif()
